@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم كوميكس دايلي</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- الشريط الجانبي -->
+        <aside class="sidebar">
+            <h1>🎬 كوميكس دايلي</h1>
+            <nav>
+                <ul>
+                    <li class="active" data-tab="dashboard">📊 لوحة التحكم</li>
+                    <li data-tab="upload">📤 رفع محتوى</li>
+                    <li data-tab="manage">📂 إدارة المحتوى</li>
+                    <li data-tab="categories">🏷️ التصنيفات</li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            <!-- لوحة التحكم -->
+            <section id="dashboard" class="tab-content active">
+                <h2>📊 لوحة التحكم</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>المحتوى</h3>
+                        <p id="total-content">0</p>
+                        <small>إجمالي العناصر</small>
+                    </div>
+                    <div class="stat-card">
+                        <h3>المشاهدات</h3>
+                        <p id="total-views">0</p>
+                        <small>إجمالي المشاهدات</small>
+                    </div>
+                    <div class="stat-card">
+                        <h3>المشاركات</h3>
+                        <p id="total-shares">0</p>
+                        <small>إجمالي المشاركات</small>
+                    </div>
+                </div>
+                <div class="recent-content">
+                    <h3>آخر المحتوى المضاف</h3>
+                    <div id="recent-list"></div>
+                </div>
+            </section>
+
+            <!-- رفع محتوى -->
+            <section id="upload" class="tab-content">
+                <h2>📤 رفع محتوى جديد</h2>
+                <form id="upload-form" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>نوع المحتوى</label>
+                        <select id="content-type" required>
+                            <option value="image">🖼️ صورة</option>
+                            <option value="video">🎬 فيديو</option>
+                            <option value="audio">🎵 صوت</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>العنوان</label>
+                        <input type="text" id="title" required placeholder="أدخل عنوان المحتوى">
+                    </div>
+                    <div class="form-group">
+                        <label>الوصف</label>
+                        <textarea id="description" rows="3" placeholder="أدخل وصفاً مختصراً"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>التصنيفات</label>
+                        <input type="text" id="tags" placeholder="مضحك, نكتة, يومي">
+                    </div>
+                    <div class="form-group">
+                        <label>اختر الملف</label>
+                        <input type="file" id="file-upload" accept="image/*,video/*,audio/*" required>
+                        <div id="file-info"></div>
+                    </div>
+                    <button type="submit" class="btn-primary">🚀 رفع المحتوى</button>
+                </form>
+                <div id="upload-status"></div>
+            </section>
+
+            <!-- إدارة المحتوى -->
+            <section id="manage" class="tab-content">
+                <h2>📂 إدارة المحتوى</h2>
+                <div class="search-bar">
+                    <input type="text" id="search-content" placeholder="🔍 بحث في المحتوى...">
+                </div>
+                <div id="content-list"></div>
+            </section>
+
+            <!-- التصنيفات -->
+            <section id="categories" class="tab-content">
+                <h2>🏷️ إدارة التصنيفات</h2>
+                <form id="category-form">
+                    <div class="form-group">
+                        <input type="text" id="category-name" placeholder="اسم التصنيف" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="category-slug" placeholder="الرابط المختصر" required>
+                    </div>
+                    <button type="submit" class="btn-primary">➕ إضافة تصنيف</button>
+                </form>
+                <div id="category-list"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
